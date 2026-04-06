@@ -1817,7 +1817,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e52ff7;
+  background: #d66be4;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3010,4 +3010,30 @@ pre .javascript .function {
   .post-body {
     text-align: justify;
   }
+}
+.site-author-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.8s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.site-author-image:hover {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+#lv-container [id*="ad"],
+#lv-container [class*="ad-"],
+#lv-container [class*="ads"],
+#lv-container iframe[src*="ad"],
+#lv-container iframe[src*="doubleclick"],
+#lv-container iframe[src*="googlesyndication"] {
+  display: none !important;
 }
