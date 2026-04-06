@@ -173,32 +173,6 @@
 
 
 
-<script>
-  (function () {
-    function cleanCommentAds() {
-      var root = document.getElementById('lv-container');
-      if (!root) return;
-      var selectors = [
-        '[id*="ad"]',
-        '[class*="ad-"]',
-        '[class*="ads"]',
-        'iframe[src*="ad"]',
-        'iframe[src*="doubleclick"]',
-        'iframe[src*="googlesyndication"]'
-      ];
-      root.querySelectorAll(selectors.join(',')).forEach(function (el) {
-        el.style.display = 'none';
-      });
-    }
-    document.addEventListener('DOMContentLoaded', cleanCommentAds);
-    var observer = new MutationObserver(cleanCommentAds);
-    document.addEventListener('DOMContentLoaded', function () {
-      var root = document.getElementById('lv-container');
-      if (root) observer.observe(root, { childList: true, subtree: true });
-    });
-  })();
-</script>
-
 
 
   <title>开发草稿1 | Abner Ho's Blog</title>
@@ -597,7 +571,13 @@
 
   
     <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTk3MC8xNjQ5Nw=="></div>
+      <script src="https://utteranc.es/client.js"
+              repo="herongcan/herongcan-blog-source"
+              issue-term="pathname"
+              theme="github-light"
+              crossorigin="anonymous"
+              async>
+      </script>
     </div>
 
   
@@ -925,17 +905,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
