@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://herongcan.github.io/photos/</loc>
+    
+    <lastmod>2026-04-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://herongcan.github.io/data-platform-project.html</loc>
     
     <lastmod>2026-04-06</lastmod>
@@ -65,14 +74,14 @@
 
   
   <url>
-    <loc>https://herongcan.github.io/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/</loc>
+    <loc>https://herongcan.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2026-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://herongcan.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>https://herongcan.github.io/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/</loc>
     <lastmod>2026-04-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

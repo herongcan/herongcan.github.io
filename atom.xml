@@ -16,8 +16,8 @@
       <name>何荣璨</name>
     </author>
     <category term="其他" scheme="https://herongcan.github.io/categories/%E5%85%B6%E4%BB%96/"/>
-    <category term="瞎折腾" scheme="https://herongcan.github.io/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/"/>
     <category term="随笔" scheme="https://herongcan.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    <category term="瞎折腾" scheme="https://herongcan.github.io/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/"/>
     <category term="文化" scheme="https://herongcan.github.io/tags/%E6%96%87%E5%8C%96/"/>
     <content>
       <![CDATA[<p>使用 WinSCP + OpenSSH + 批处理文件 + Windows 任务计划，实现数据库备份、传输与清理的自动化流程（Windows -&gt; Windows）。</p><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><ol><li>正式端导出数据库备份到本地目录。  </li><li>调用 WinSCP 脚本把备份同步到测试端。  </li><li>清理一个月前备份文件与历史日志。  </li><li>使用任务计划按固定时间自动执行。</li></ol><h2 id="WinSCP-要点"><a href="#WinSCP-要点" class="headerlink" title="WinSCP 要点"></a>WinSCP 要点</h2><ul><li>支持 SFTP&#x2F;SCP，适合批处理脚本化。  </li><li>常用命令：<code>open</code>、<code>synchronize remote</code>、<code>option synchdelete on</code>。  </li><li>建议在正式端执行同步脚本，减少链路复杂度。</li></ul><p>示例思路：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">option batch continue</span><br><span class="line">option confirm off</span><br><span class="line">option synchdelete on</span><br><span class="line">open sftp://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:22</span><br><span class="line">synchronize remote &lt;local-path&gt; &lt;remote-path&gt;</span><br><span class="line">close</span><br><span class="line">exit</span><br></pre></td></tr></table></figure><h2 id="OpenSSH-要点"><a href="#OpenSSH-要点" class="headerlink" title="OpenSSH 要点"></a>OpenSSH 要点</h2><ul><li>在接收端安装并启用 OpenSSH 服务。  </li><li>配置防火墙放行 <code>22</code> 端口。  </li><li>服务设置为自动启动，确保定时任务稳定可用。</li></ul><h2 id="批处理脚本要点"><a href="#批处理脚本要点" class="headerlink" title="批处理脚本要点"></a>批处理脚本要点</h2><ul><li>导出数据库（如 <code>exp</code> 命令）。  </li><li>调用 WinSCP 执行同步并输出日志。  </li><li>用 <code>forfiles</code> 清理过期 <code>dmp/txt</code> 文件。</li></ul><h2 id="任务计划程序"><a href="#任务计划程序" class="headerlink" title="任务计划程序"></a>任务计划程序</h2><ol><li>创建任务并填写描述。  </li><li>设置触发器（如每天凌晨执行）。  </li><li>操作中指定批处理脚本路径。</li></ol>]]>
@@ -34,8 +34,8 @@
       <name>何荣璨</name>
     </author>
     <category term="其他" scheme="https://herongcan.github.io/categories/%E5%85%B6%E4%BB%96/"/>
-    <category term="瞎折腾" scheme="https://herongcan.github.io/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/"/>
     <category term="随笔" scheme="https://herongcan.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    <category term="瞎折腾" scheme="https://herongcan.github.io/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/"/>
     <category term="文化" scheme="https://herongcan.github.io/tags/%E6%96%87%E5%8C%96/"/>
     <content>
       <![CDATA[<p>本文为开发过程中的问题速记，已从静态页迁移到源码仓，后续会持续整理为结构化笔记。</p><h2 id="导入-Spring-源码包报错"><a href="#导入-Spring-源码包报错" class="headerlink" title="导入 Spring 源码包报错"></a>导入 Spring 源码包报错</h2><ul><li>问题：JDK 上下文不匹配导致构建报错。  </li><li>记录：检查 JDK 与项目配置一致性，排查本地环境差异。</li></ul><h2 id="MySQL-服务清理"><a href="#MySQL-服务清理" class="headerlink" title="MySQL 服务清理"></a>MySQL 服务清理</h2><ul><li>控制面板卸载后，补充清理注册表服务项。  </li><li>命令行可使用 <code>sc delete &lt;serviceName&gt;</code> 删除残留服务。</li></ul><h2 id="Vue-项目依赖缺失"><a href="#Vue-项目依赖缺失" class="headerlink" title="Vue 项目依赖缺失"></a>Vue 项目依赖缺失</h2><ul><li><code>Cannot find module</code> 类报错可先清理依赖后重装：<code>npm install</code>。</li></ul><h2 id="SQL-脚本与提交规范"><a href="#SQL-脚本与提交规范" class="headerlink" title="SQL 脚本与提交规范"></a>SQL 脚本与提交规范</h2><ul><li>提交代码建议携带建表、变更、查询示例脚本，便于联调与回溯。</li></ul><h2 id="Kettle-使用记录"><a href="#Kettle-使用记录" class="headerlink" title="Kettle 使用记录"></a>Kettle 使用记录</h2><ul><li>区分 <code>ktr</code>（转换）与 <code>kjb</code>（作业）。  </li><li>支持命令行和批处理方式执行。</li></ul><h2 id="UNION-UNION-ALL"><a href="#UNION-UNION-ALL" class="headerlink" title="UNION &#x2F; UNION ALL"></a>UNION &#x2F; UNION ALL</h2><ul><li>关注列对齐与排序字段一致性。  </li><li>多数据源汇总时可用 <code>UNION ALL</code> 纵向拼接后统一排序。</li></ul><h2 id="其他速记"><a href="#其他速记" class="headerlink" title="其他速记"></a>其他速记</h2><ul><li>HTML 修改不生效：检查应用更新策略与缓存。  </li><li>页面空白区点击事件：注意遮罩层与事件冒泡。  </li><li>元素层级：使用 <code>z-index</code> 管理显示优先级。</li></ul>]]>
@@ -52,8 +52,8 @@
       <name>何荣璨</name>
     </author>
     <category term="生活" scheme="https://herongcan.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
-    <category term="瞎折腾" scheme="https://herongcan.github.io/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/"/>
     <category term="随笔" scheme="https://herongcan.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    <category term="瞎折腾" scheme="https://herongcan.github.io/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/"/>
     <category term="文化" scheme="https://herongcan.github.io/tags/%E6%96%87%E5%8C%96/"/>
     <content>
       <![CDATA[<p>龙儿戚戚将欲行，风逍遥兮雨霖铃。<br>神回官渡一声啸，身向王母四季晴。</p>]]>
