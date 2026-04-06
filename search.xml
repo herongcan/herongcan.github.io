@@ -21,35 +21,6 @@
       </tags>
   </entry>
   <entry>
-    <title>数据平台项目</title>
-    <url>/data-platform-project.html</url>
-    <content><![CDATA[<h2 id="项目名称"><a href="#项目名称" class="headerlink" title="项目名称"></a>项目名称</h2><p>YXD数据平台</p>
-<h2 id="项目定位"><a href="#项目定位" class="headerlink" title="项目定位"></a>项目定位</h2><p>基于 DDD 分层架构的企业级微服务数据平台，提供征信评分、运营商数据、黑名单查询等核心数据服务，集成 11 家三方数据供应商，统一封装 OpenAPI 接口体系。</p>
-<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>Spring Boot、Spring Cloud Gateway、MyBatis Plus、Elasticsearch、RabbitMQ、Docker</p>
-<h2 id="核心职责"><a href="#核心职责" class="headerlink" title="核心职责"></a>核心职责</h2><ol>
-<li>设计并实现征信评分、运营商数据验证、黑名单查询等核心业务模块，支撑 12 个微服务模块独立部署与扩展。</li>
-<li>集成阿里云、腾讯云、百融等 11 家供应商，建设统一 OpenAPI 接入基础设施，支持 26 个 API 端点。</li>
-<li>基于 Spring Cloud Gateway 实现 JWT 鉴权、API 订单管理、上下文传递（TransmittableThreadLocal）、RSA 响应加密。</li>
-<li>参与微服务拆分设计，制定 DDD 分层规范，完善开发文档与 Code Review 流程。</li>
-<li>通过结果复用与 RabbitMQ 异步日志处理优化吞吐，结合动态配置实现供应商热切换。</li>
-<li>编写接口、数据库与接入文档，配合 QA 联调并保持文档与代码同步更新。</li>
-</ol>
-<h2 id="技术亮点"><a href="#技术亮点" class="headerlink" title="技术亮点"></a>技术亮点</h2><ul>
-<li>统一三方接入架构：ExternalService-CommandHandler-Controller 三层调用模式。</li>
-<li>上下文管理：基于 TransmittableThreadLocal 的跨线程池上下文传递。</li>
-<li>计费与对账：API 订单全生命周期管理，支持成功&#x2F;失败、计费、复用标记。</li>
-<li>安全设计：JWT 鉴权、RSA 响应加密、数字签名保障数据安全。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-        <tag>微服务</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>WinSCP_work</title>
     <url>/WinSCP-work.html</url>
     <content><![CDATA[<p>使用 WinSCP + OpenSSH + 批处理文件 + Windows 任务计划，实现数据库备份、传输与清理的自动化流程（Windows -&gt; Windows）。</p>
@@ -90,6 +61,35 @@
         <tag>瞎折腾</tag>
         <tag>随笔</tag>
         <tag>文化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据平台项目</title>
+    <url>/data-platform-project.html</url>
+    <content><![CDATA[<h2 id="项目名称"><a href="#项目名称" class="headerlink" title="项目名称"></a>项目名称</h2><p>YXD数据平台</p>
+<h2 id="项目定位"><a href="#项目定位" class="headerlink" title="项目定位"></a>项目定位</h2><p>基于 DDD 分层架构的企业级微服务数据平台，提供征信评分、运营商数据、黑名单查询等核心数据服务，集成 11 家三方数据供应商，统一封装 OpenAPI 接口体系。</p>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>Spring Boot、Spring Cloud Gateway、MyBatis Plus、Elasticsearch、RabbitMQ、Docker</p>
+<h2 id="核心职责"><a href="#核心职责" class="headerlink" title="核心职责"></a>核心职责</h2><ol>
+<li>设计并实现征信评分、运营商数据验证、黑名单查询等核心业务模块，支撑 12 个微服务模块独立部署与扩展。</li>
+<li>集成阿里云、腾讯云、百融等 11 家供应商，建设统一 OpenAPI 接入基础设施，支持 26 个 API 端点。</li>
+<li>基于 Spring Cloud Gateway 实现 JWT 鉴权、API 订单管理、上下文传递（TransmittableThreadLocal）、RSA 响应加密。</li>
+<li>参与微服务拆分设计，制定 DDD 分层规范，完善开发文档与 Code Review 流程。</li>
+<li>通过结果复用与 RabbitMQ 异步日志处理优化吞吐，结合动态配置实现供应商热切换。</li>
+<li>编写接口、数据库与接入文档，配合 QA 联调并保持文档与代码同步更新。</li>
+</ol>
+<h2 id="技术亮点"><a href="#技术亮点" class="headerlink" title="技术亮点"></a>技术亮点</h2><ul>
+<li>统一三方接入架构：ExternalService-CommandHandler-Controller 三层调用模式。</li>
+<li>上下文管理：基于 TransmittableThreadLocal 的跨线程池上下文传递。</li>
+<li>计费与对账：API 订单全生命周期管理，支持成功&#x2F;失败、计费、复用标记。</li>
+<li>安全设计：JWT 鉴权、RSA 响应加密、数字签名保障数据安全。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+        <tag>微服务</tag>
       </tags>
   </entry>
   <entry>
