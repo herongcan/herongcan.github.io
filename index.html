@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Abner Ho&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="记录技术、生活与随笔">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Abner Ho&#39;s Blog">
+<meta property="og:url" content="https://herongcan.github.io/">
+<meta property="og:site_name" content="Abner Ho&#39;s Blog">
+<meta property="og:description" content="记录技术、生活与随笔">
+<meta property="og:locale">
+<meta property="article:author" content="何荣璨">
+<meta property="article:tag" content="何荣璨">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Abner Ho's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Abner Ho&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一川月白寒光碎</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://herongcan.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-WinSCP-work" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/WinSCP-work.html" class="article-date">
+  <time class="dt-published" datetime="2019-03-01T08:58:07.000Z" itemprop="datePublished">2019-03-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/WinSCP-work.html">WinSCP_work</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>使用 WinSCP + OpenSSH + 批处理文件 + Windows 任务计划，实现数据库备份、传输与清理的自动化流程（Windows -&gt; Windows）。</p>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><ol>
+<li>正式端导出数据库备份到本地目录。  </li>
+<li>调用 WinSCP 脚本把备份同步到测试端。  </li>
+<li>清理一个月前备份文件与历史日志。  </li>
+<li>使用任务计划按固定时间自动执行。</li>
+</ol>
+<h2 id="WinSCP-要点"><a href="#WinSCP-要点" class="headerlink" title="WinSCP 要点"></a>WinSCP 要点</h2><ul>
+<li>支持 SFTP&#x2F;SCP，适合批处理脚本化。  </li>
+<li>常用命令：<code>open</code>、<code>synchronize remote</code>、<code>option synchdelete on</code>。  </li>
+<li>建议在正式端执行同步脚本，减少链路复杂度。</li>
+</ul>
+<p>示例思路：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">option batch continue</span><br><span class="line">option confirm off</span><br><span class="line">option synchdelete on</span><br><span class="line">open sftp://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:22</span><br><span class="line">synchronize remote &lt;local-path&gt; &lt;remote-path&gt;</span><br><span class="line">close</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<h2 id="OpenSSH-要点"><a href="#OpenSSH-要点" class="headerlink" title="OpenSSH 要点"></a>OpenSSH 要点</h2><ul>
+<li>在接收端安装并启用 OpenSSH 服务。  </li>
+<li>配置防火墙放行 <code>22</code> 端口。  </li>
+<li>服务设置为自动启动，确保定时任务稳定可用。</li>
+</ul>
+<h2 id="批处理脚本要点"><a href="#批处理脚本要点" class="headerlink" title="批处理脚本要点"></a>批处理脚本要点</h2><ul>
+<li>导出数据库（如 <code>exp</code> 命令）。  </li>
+<li>调用 WinSCP 执行同步并输出日志。  </li>
+<li>用 <code>forfiles</code> 清理过期 <code>dmp/txt</code> 文件。</li>
+</ul>
+<h2 id="任务计划程序"><a href="#任务计划程序" class="headerlink" title="任务计划程序"></a>任务计划程序</h2><ol>
+<li>创建任务并填写描述。  </li>
+<li>设置触发器（如每天凌晨执行）。  </li>
+<li>操作中指定批处理脚本路径。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://herongcan.github.io/WinSCP-work.html" data-id="cmnng0g3p0005u9qx5c2iaut3" data-title="WinSCP_work" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E5%8C%96/" rel="tag">文化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/" rel="tag">瞎折腾</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-开发草稿" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/%E5%BC%80%E5%8F%91%E8%8D%89%E7%A8%BF.html" class="article-date">
+  <time class="dt-published" datetime="2019-03-01T08:43:54.000Z" itemprop="datePublished">2019-03-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/%E5%BC%80%E5%8F%91%E8%8D%89%E7%A8%BF.html">开发草稿1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文为开发过程中的问题速记，已从静态页迁移到源码仓，后续会持续整理为结构化笔记。</p>
+<h2 id="导入-Spring-源码包报错"><a href="#导入-Spring-源码包报错" class="headerlink" title="导入 Spring 源码包报错"></a>导入 Spring 源码包报错</h2><ul>
+<li>问题：JDK 上下文不匹配导致构建报错。  </li>
+<li>记录：检查 JDK 与项目配置一致性，排查本地环境差异。</li>
+</ul>
+<h2 id="MySQL-服务清理"><a href="#MySQL-服务清理" class="headerlink" title="MySQL 服务清理"></a>MySQL 服务清理</h2><ul>
+<li>控制面板卸载后，补充清理注册表服务项。  </li>
+<li>命令行可使用 <code>sc delete &lt;serviceName&gt;</code> 删除残留服务。</li>
+</ul>
+<h2 id="Vue-项目依赖缺失"><a href="#Vue-项目依赖缺失" class="headerlink" title="Vue 项目依赖缺失"></a>Vue 项目依赖缺失</h2><ul>
+<li><code>Cannot find module</code> 类报错可先清理依赖后重装：<code>npm install</code>。</li>
+</ul>
+<h2 id="SQL-脚本与提交规范"><a href="#SQL-脚本与提交规范" class="headerlink" title="SQL 脚本与提交规范"></a>SQL 脚本与提交规范</h2><ul>
+<li>提交代码建议携带建表、变更、查询示例脚本，便于联调与回溯。</li>
+</ul>
+<h2 id="Kettle-使用记录"><a href="#Kettle-使用记录" class="headerlink" title="Kettle 使用记录"></a>Kettle 使用记录</h2><ul>
+<li>区分 <code>ktr</code>（转换）与 <code>kjb</code>（作业）。  </li>
+<li>支持命令行和批处理方式执行。</li>
+</ul>
+<h2 id="UNION-UNION-ALL"><a href="#UNION-UNION-ALL" class="headerlink" title="UNION &#x2F; UNION ALL"></a>UNION &#x2F; UNION ALL</h2><ul>
+<li>关注列对齐与排序字段一致性。  </li>
+<li>多数据源汇总时可用 <code>UNION ALL</code> 纵向拼接后统一排序。</li>
+</ul>
+<h2 id="其他速记"><a href="#其他速记" class="headerlink" title="其他速记"></a>其他速记</h2><ul>
+<li>HTML 修改不生效：检查应用更新策略与缓存。  </li>
+<li>页面空白区点击事件：注意遮罩层与事件冒泡。  </li>
+<li>元素层级：使用 <code>z-index</code> 管理显示优先级。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://herongcan.github.io/%E5%BC%80%E5%8F%91%E8%8D%89%E7%A8%BF.html" data-id="cmnng0g3p0007u9qx14ih469k" data-title="开发草稿1" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E5%8C%96/" rel="tag">文化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/" rel="tag">瞎折腾</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-别友人" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/%E5%88%AB%E5%8F%8B%E4%BA%BA.html" class="article-date">
+  <time class="dt-published" datetime="2018-12-06T02:14:22.000Z" itemprop="datePublished">2018-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/%E5%88%AB%E5%8F%8B%E4%BA%BA.html">别友人</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>龙儿戚戚将欲行，风逍遥兮雨霖铃。<br>神回官渡一声啸，身向王母四季晴。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://herongcan.github.io/%E5%88%AB%E5%8F%8B%E4%BA%BA.html" data-id="cmnng0g3p0006u9qxfr3456ig" data-title="别友人" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E5%8C%96/" rel="tag">文化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/" rel="tag">瞎折腾</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Welcome-to-my-blog" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/Welcome-to-my-blog.html" class="article-date">
+  <time class="dt-published" datetime="2018-10-17T05:57:04.000Z" itemprop="datePublished">2018-10-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/Welcome-to-my-blog.html">Welcome to my blog!</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本博客采用 NexT-Pisces 主题，做了部分自定义样式与插件扩展。</p>
+<h2 id="博客功能"><a href="#博客功能" class="headerlink" title="博客功能"></a>博客功能</h2><ul>
+<li>站内检索</li>
+<li>评论系统</li>
+<li>分享组件</li>
+<li>访问统计</li>
+<li>搜索引擎收录支持</li>
+</ul>
+<h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>我是何荣璨，一个在 IT 行业奔跑的码者。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://herongcan.github.io/Welcome-to-my-blog.html" data-id="cmnng0g3m0001u9qxg3ctcx4c" data-title="Welcome to my blog!" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/" rel="tag">瞎折腾</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/hello-world.html" class="article-date">
+  <time class="dt-published" datetime="2018-09-26T09:45:43.000Z" itemprop="datePublished">2018-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/hello-world.html">hello-world</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>欢迎来到我的博客。这个页面是迁移到 Hexo 源码仓库后的第一篇文章样板。</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
+<li>当前站点从静态产物仓逐步迁回源码仓维护。</li>
+<li>后续将把历史 HTML 页面按优先级整理为 Markdown 文章。</li>
+<li>发布方式统一为 <code>hexo generate</code> + <code>hexo deploy</code>。</li>
+</ul>
+<h2 id="本地命令"><a href="#本地命令" class="headerlink" title="本地命令"></a>本地命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm run clean</span><br><span class="line">npm run server</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://herongcan.github.io/hello-world.html" data-id="cmnng0g3n0002u9qx5oe75ctq" data-title="hello-world" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%8C%96/" rel="tag">文化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/" rel="tag">瞎折腾</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%96%87%E5%8C%96/" style="font-size: 10px;">文化</a> <a href="/tags/%E7%9E%8E%E6%8A%98%E8%85%BE/" style="font-size: 20px;">瞎折腾</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 20px;">随笔</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/WinSCP-work.html">WinSCP_work</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%BC%80%E5%8F%91%E8%8D%89%E7%A8%BF.html">开发草稿1</a>
+          </li>
+        
+          <li>
+            <a href="/%E5%88%AB%E5%8F%8B%E4%BA%BA.html">别友人</a>
+          </li>
+        
+          <li>
+            <a href="/Welcome-to-my-blog.html">Welcome to my blog!</a>
+          </li>
+        
+          <li>
+            <a href="/hello-world.html">hello-world</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 何荣璨<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
