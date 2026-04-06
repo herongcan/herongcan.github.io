@@ -1817,7 +1817,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #e8ed20;
+  background: #41f478;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3042,119 +3042,4 @@ pre .javascript .function {
 #lv-container iframe[src*="doubleclick"],
 #lv-container iframe[src*="googlesyndication"] {
   display: none !important;
-}
-.github-corner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: 0;
-  z-index: 1000;
-  color: #fff;
-  fill: #151513;
-}
-.github-corner .octo-arm {
-  transform-origin: 130px 106px;
-}
-.github-corner:hover .octo-arm {
-  animation: octocat-wave 560ms ease-in-out;
-}
-@media (max-width: 500px) {
-  .github-corner:hover .octo-arm {
-    animation: none;
-  }
-  .github-corner .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
-}
-@-moz-keyframes octocat-wave {
-  0%, 100% {
-    -webkit-transform: rotate(0);
-    -moz-transform: rotate(0);
-    -ms-transform: rotate(0);
-    -o-transform: rotate(0);
-    transform: rotate(0);
-  }
-  20%, 60% {
-    -webkit-transform: rotate(-25deg);
-    -moz-transform: rotate(-25deg);
-    -ms-transform: rotate(-25deg);
-    -o-transform: rotate(-25deg);
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    -webkit-transform: rotate(10deg);
-    -moz-transform: rotate(10deg);
-    -ms-transform: rotate(10deg);
-    -o-transform: rotate(10deg);
-    transform: rotate(10deg);
-  }
-}
-@-webkit-keyframes octocat-wave {
-  0%, 100% {
-    -webkit-transform: rotate(0);
-    -moz-transform: rotate(0);
-    -ms-transform: rotate(0);
-    -o-transform: rotate(0);
-    transform: rotate(0);
-  }
-  20%, 60% {
-    -webkit-transform: rotate(-25deg);
-    -moz-transform: rotate(-25deg);
-    -ms-transform: rotate(-25deg);
-    -o-transform: rotate(-25deg);
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    -webkit-transform: rotate(10deg);
-    -moz-transform: rotate(10deg);
-    -ms-transform: rotate(10deg);
-    -o-transform: rotate(10deg);
-    transform: rotate(10deg);
-  }
-}
-@-o-keyframes octocat-wave {
-  0%, 100% {
-    -webkit-transform: rotate(0);
-    -moz-transform: rotate(0);
-    -ms-transform: rotate(0);
-    -o-transform: rotate(0);
-    transform: rotate(0);
-  }
-  20%, 60% {
-    -webkit-transform: rotate(-25deg);
-    -moz-transform: rotate(-25deg);
-    -ms-transform: rotate(-25deg);
-    -o-transform: rotate(-25deg);
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    -webkit-transform: rotate(10deg);
-    -moz-transform: rotate(10deg);
-    -ms-transform: rotate(10deg);
-    -o-transform: rotate(10deg);
-    transform: rotate(10deg);
-  }
-}
-@keyframes octocat-wave {
-  0%, 100% {
-    -webkit-transform: rotate(0);
-    -moz-transform: rotate(0);
-    -ms-transform: rotate(0);
-    -o-transform: rotate(0);
-    transform: rotate(0);
-  }
-  20%, 60% {
-    -webkit-transform: rotate(-25deg);
-    -moz-transform: rotate(-25deg);
-    -ms-transform: rotate(-25deg);
-    -o-transform: rotate(-25deg);
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    -webkit-transform: rotate(10deg);
-    -moz-transform: rotate(10deg);
-    -ms-transform: rotate(10deg);
-    -o-transform: rotate(10deg);
-    transform: rotate(10deg);
-  }
 }
