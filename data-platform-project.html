@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据平台项目</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 40px auto;
+      padding: 0 16px 40px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 18px rgba(31, 41, 55, 0.06);
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 12px;
+      line-height: 1.35;
+    }
+
+    h1 {
+      font-size: 30px;
+      color: #111827;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: var(--primary);
+      border-left: 4px solid var(--primary);
+      padding-left: 10px;
+      margin-top: 10px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-top: 16px;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .meta strong {
+      color: var(--text);
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      margin-top: 28px;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>数据平台项目</h1>
+      <p class="meta"><strong>项目名称：</strong>YXD数据平台</p>
+      <p class="meta"><strong>项目定位：</strong>基于DDD分层架构的企业级微服务数据平台，提供征信评分、运营商数据、黑名单查询等核心数据服务，集成11家三方数据供应商，统一封装OpenAPI接口体系。</p>
+      <p class="meta"><strong>技术栈：</strong>Spring Boot、Spring Cloud Gateway、MyBatis Plus、Elasticsearch、RabbitMQ、Docker</p>
+    </section>
+
+    <section class="card">
+      <h2>核心职责</h2>
+      <ul>
+        <li><strong>核心业务开发：</strong>设计并实现征信评分、运营商数据验证、黑名单查询等核心业务模块，采用DDD分层架构确保业务逻辑的准确性与可维护性，支持12个微服务模块的独立部署与扩展。</li>
+        <li><strong>三方数据接入：</strong>集成阿里云、腾讯云、百融等11家数据供应商，实现统一的OpenAPI接入基础设施，包含动态配置加载、多供应商路由、结果复用机制，支持征信评分、身份核验、反欺诈等26个API端点。</li>
+        <li><strong>API网关与安全：</strong>基于Spring Cloud Gateway设计统一网关，实现JWT鉴权、API订单管理、上下文传递（TransmittableThreadLocal）、RSA响应加密等机制，确保API调用的安全性与可追溯性。</li>
+        <li><strong>系统架构优化：</strong>参与微服务架构拆分与设计，制定统一的DDD分层规范（types/domain/persistence/external/messaging/application/web），编写API接入开发文档，建立代码规范与Code Review流程。</li>
+        <li><strong>性能与稳定性：</strong>实现API结果复用机制减少重复调用，通过RabbitMQ异步处理API调用日志优化系统吞吐，基于数据库动态配置支持供应商热切换，保障系统线上稳定运行。</li>
+        <li><strong>质量保障与文档：</strong>编写技术文档（接口文档、数据库设计文档、API接入指南），配合QA团队进行测试联调，严格执行代码规范，保持文档与代码的同步更新。</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>技术亮点</h2>
+      <ul>
+        <li><strong>统一三方接入架构：</strong>设计ExternalService-CommandHandler-Controller三层调用模式，支持多供应商动态路由与配置热更新。</li>
+        <li><strong>上下文管理：</strong>基于TransmittableThreadLocal实现跨线程池的API上下文传递，支持复杂业务场景下的状态管理。</li>
+        <li><strong>计费与对账：</strong>建立API订单生命周期管理，每次调用产生订单记录，支持成功/失败状态、计费标识与复用标记的完整对账。</li>
+        <li><strong>安全设计：</strong>实现统一的JWT鉴权、RSA响应加密、数字签名机制，保障API数据传输的安全性与完整性。</li>
+      </ul>
+    </section>
+
+    <p class="footer-note">更新时间：2026</p>
+  </main>
+</body>
+</html>
