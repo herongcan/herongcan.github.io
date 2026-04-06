@@ -64,20 +64,6 @@
       </tags>
   </entry>
   <entry>
-    <title>别友人</title>
-    <url>/%E5%88%AB%E5%8F%8B%E4%BA%BA.html</url>
-    <content><![CDATA[<p>龙儿戚戚将欲行，风逍遥兮雨霖铃。<br>神回官渡一声啸，身向王母四季晴。</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>瞎折腾</tag>
-        <tag>随笔</tag>
-        <tag>文化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hello-world</title>
     <url>/hello-world.html</url>
     <content><![CDATA[<p>欢迎来到我的博客。这个页面是迁移到 Hexo 源码仓库后的第一篇文章样板。</p>
@@ -93,6 +79,20 @@
       </categories>
       <tags>
         <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>别友人</title>
+    <url>/%E5%88%AB%E5%8F%8B%E4%BA%BA.html</url>
+    <content><![CDATA[<p>龙儿戚戚将欲行，风逍遥兮雨霖铃。<br>神回官渡一声啸，身向王母四季晴。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>瞎折腾</tag>
+        <tag>随笔</tag>
+        <tag>文化</tag>
       </tags>
   </entry>
   <entry>
