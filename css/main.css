@@ -1817,7 +1817,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d66be4;
+  background: #901dff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3016,7 +3016,7 @@ pre .javascript .function {
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  transition: transform 0.8s ease, box-shadow 0.3s ease;
+  transition: transform 0.7s ease, box-shadow 0.3s ease;
   transform-style: preserve-3d;
   backface-visibility: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
@@ -3028,6 +3028,10 @@ pre .javascript .function {
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
   box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+.links-of-blogroll-list iframe {
+  max-width: 100%;
+  border-radius: 4px;
 }
 #lv-container [id*="ad"],
 #lv-container [class*="ad-"],
